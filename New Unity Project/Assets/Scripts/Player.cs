@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float horizontal;
     [SerializeField] public float speed = 10f;
     [SerializeField] public float jumpHeight = 10f;
-    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isFlipped;
     [SerializeField] Rigidbody2D rb;
 
    
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     {
         //Functions
         Movement();
+        FlipSystem();
     }
 
      private void OnCollisionEnter2D(Collision2D other) 
@@ -55,6 +57,23 @@ public class Player : MonoBehaviour
     {
         //Set the y velocity higher than 0 so it jumps
         rb.velocity = new Vector2(rb.velocity.x,jumpHeight);
+
+    }
+
+    private void Flip()
+    {
+        transform.Rotate(0f,180f,0f);
+
+    }
+    private void FlipSystem()
+    {
+
+        if(isFlipped&&horizontal<0||!isFlipped&&horizontal>0)
+        {
+            Flip();
+            isFlipped = !isFlipped;
+
+        }
 
     }
   
