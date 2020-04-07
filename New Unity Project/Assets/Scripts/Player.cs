@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     private void Movement() 
     {
         //Horizontal Movement
-        horizontal = Input.GetAxis("Horizontal"); 
+        horizontal = Input.GetAxisRaw("Horizontal"); 
         rb.velocity = new  Vector2(horizontal*speed,rb.velocity.y);
         //Jump only if it is on the ground and someone pressed space
         if(isGrounded&&Input.GetKey(KeyCode.Space))
