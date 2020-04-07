@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    #region Variables
+ 
     //Variables
     [SerializeField] private float horizontal;
     [SerializeField] public float speed = 10f;
     [SerializeField] public float jumpHeight = 10f;
     [SerializeField] private bool isGrounded;
     [SerializeField] Rigidbody2D rb;
-    #endregion
-    #region BuiltInFunctions
+
+   
     void Start()
     {
-        
+        //Getting rigidbody from gameobject
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -31,15 +32,15 @@ public class Player : MonoBehaviour
         isGrounded = true;
         
     }
-    #endregion
-    #region CustomFunctions
+ 
+
     private void Movement() 
     {
         //Horizontal Movement
         horizontal = Input.GetAxis("Horizontal"); 
         rb.velocity = new  Vector2(horizontal*speed,rb.velocity.y);
         //Jump only if it is on the ground and someone pressed space
-        if(!isGrounded&&Input.GetKeyDown(KeyCode.Space))
+        if(isGrounded&&Input.GetKey(KeyCode.Space))
         {
             //Jump
             Jump();
@@ -56,5 +57,5 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x,jumpHeight);
 
     }
-    #endregion
+  
 }
