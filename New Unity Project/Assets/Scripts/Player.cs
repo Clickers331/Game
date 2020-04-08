@@ -11,13 +11,15 @@ public class Player : MonoBehaviour
     [SerializeField] public float jumpHeight = 10f;
     [SerializeField] private bool isGrounded = true;
     [SerializeField] private bool isFlipped;
+    [SerializeField] public Animator animator;
     [SerializeField] Rigidbody2D rb;
 
    
     void Start()
     {
-        //Getting rigidbody from gameobject
+        //Getting components automaticly
         rb = gameObject.GetComponent<Rigidbody2D>();
+        animator =  gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -41,6 +43,9 @@ public class Player : MonoBehaviour
         //Horizontal Movement
         horizontal = Input.GetAxisRaw("Horizontal"); 
         rb.velocity = new  Vector2(horizontal*speed,rb.velocity.y);
+        //Setting animation parameters
+        animator.SetFloat("Speed",Mathf.Abs(horizontal));
+        animator.SetBool("Jump",isGrounded);
         //Jump only if it is on the ground and someone pressed space
         if(isGrounded&&Input.GetKey(KeyCode.Space))
         {
