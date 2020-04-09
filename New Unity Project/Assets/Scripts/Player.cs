@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
         //Functions
         Movement();
         FlipSystem();
+        
     }
 
      private void OnCollisionEnter2D(Collision2D other) 
@@ -45,9 +46,9 @@ public class Player : MonoBehaviour
         rb.velocity = new  Vector2(horizontal*speed,rb.velocity.y);
         //Setting animation parameters
         animator.SetFloat("Speed",Mathf.Abs(horizontal));
-        animator.SetBool("Jump",!isGrounded);
+        animator.SetBool("Jump", !isGrounded);
         //Jump only if it is on the ground and someone pressed space
-        if(isGrounded&&Input.GetKey(KeyCode.Space))
+        if (isGrounded&&Input.GetKey(KeyCode.Space))
         {
             //Jump
             Jump();
